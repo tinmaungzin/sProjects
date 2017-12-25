@@ -1,0 +1,47 @@
+
+body{
+  background-color:#312a4c;
+  
+
+}
+
+/*  @media (min-width: 800px) {
+  body{
+    background-image: url(images/MB.jpg);
+  }
+}
+@media (min-width: 1000px) {
+  body{
+    background-image: url(images/MB3.jpg);
+  }
+}   */
+  
+
+
+
+.title{
+
+	color: white;
+	text-align: center;
+
+}
+
+@media only screen and (max-width: 769px) { 
+   #name{ display: none !important; }
+} 
+
+@media only screen and (max-width: 1040px) { 
+   #icons{ display: none !important; }
+} 
+
+
+
+#studata{
+
+  background-color: white;
+}
+
+ 
+input::-moz-placeholder {  /* Firefox 19+ */
+color: white !important;  
+}
