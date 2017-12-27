@@ -36,12 +36,13 @@ body{
 
 
 
-#studata{
+#sdata{
 
-  background-color: white;
+  background-color:#e1e8e3;
 }
 
  
 input::-moz-placeholder {  /* Firefox 19+ */
 color: white !important;  
 }
+

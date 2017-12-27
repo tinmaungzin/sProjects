@@ -143,8 +143,11 @@ $result = mysqli_query($conn,$query) or die ("Couldn’t execute query.");
 
 <table class="table is-narrow is-hoverable">
 <tr>
+  <th>No</th>
 <th>Student ID</th>
 <th>Student Name</th>
+
+
 <th></th>
 
 
@@ -152,6 +155,7 @@ $result = mysqli_query($conn,$query) or die ("Couldn’t execute query.");
 
 
 <?php  
+$num=1;
 while($row = mysqli_fetch_assoc($result))
 {
 extract($row);
@@ -160,18 +164,20 @@ echo "
 
 <tr>
 
+<form  action='studata.php' method='post'>
 
+  <td>$num</td>
 
-<td >$id</td> 
+<td ><input type='hidden' name='id' value='$id'>$id</td> 
 
-<td >$name</td>
-<td> <button>View</button></td>
-
+<td ><input type='hidden' name='id' value='$id'>$name</td>
+<td> <button class='button is-success is-outlined is-small' type='submit'>View</button></td>
+</form>
 
 
 
 </tr>";
-
+$num ++;
 }
 
 
@@ -265,6 +271,7 @@ echo "</table>\n";
   </div>
 </div>
 
+<button class="button is-success is-inverted is-outlined is-small" type="submit">GO</button>
 
   </div>
 </form>

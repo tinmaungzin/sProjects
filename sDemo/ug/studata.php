@@ -16,6 +16,25 @@
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+    
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/form.min.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/form.min.js"></script>
+
+
+
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/dropdown.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/components/dropdown.min.js"></script>
+
 </head>
 <link rel="stylesheet" type="text/css" href="../style.css">
 
@@ -35,7 +54,7 @@ $id=mysqli_real_escape_string($conn,$_POST['id']);
 
 
 
-$query= "select * from data where id='$id'";
+$query= "select * from data,ac_info where data.id='$id' and data.id=ac_info.id";
 
 $result = mysqli_query($conn,$query)
 or die ("Couldn’t execute query.");
@@ -134,76 +153,82 @@ or die ("Couldn’t execute query.");
   
     <div class="column"></div>
 
-  <div class="column is-one-third" >
+  <div id="sdata" class="column is-half" >
 
 <?php  
+
+
 while($row = mysqli_fetch_assoc($result))
 {
 extract($row);
     
+if($major==='CE'){
+  $s_major='Civil Engineering';
+}
+if($yrs==='1st'){
 
-    
+  $s_yrs='I';
+}
+if($yrs==='2nd'){
+
+  $s_yrs='II';
+}
+
 
 echo "
-<ul class='collection card-panel teal #c8e6c9 green lighten-4'>
-    
-    <li class='collection-item avatar #c8e6c9 green lighten-4'>
-      <i class='material-icons circle red'>person_pin</i>
-      <span class='title black-text text-darken-2'>Name</span>
-      <p>$name 
-         
-      </p>
-    </li>
 
-    <li class='collection-item avatar #c8e6c9 green lighten-4'>
-      <i class='material-icons circle red'>picture_in_picture</i>
-      <span class='title black-text text-darken-2'>ID</span>
-      <p>$id
-         
-      </p>
-    </li>
-    <li class='collection-item avatar #c8e6c9 green lighten-4'>
-      <i class='material-icons circle red'>insert_chart</i>
-      <span class='title black-text text-darken-2'>Year</span>
-      <p>$year
-         
-      </p>
-    </li>
-    <li class='collection-item avatar #c8e6c9 green lighten-4'>
-      <i class='material-icons circle red'>directions_bike</i>
-      <span class='title black-text text-darken-2'>Major</span>
-      <p>$major 
-         
-      </p>
-    </li>
-    <li class='collection-item avatar #c8e6c9 green lighten-4'>
-      <i class='material-icons circle red'>wc</i>
-      <span class='title black-text text-darken-2'>Gender</span>
-      <p>$gender
-         
-      </p>
-    </li>
-    <li class='collection-item avatar #c8e6c9 green lighten-4'>
-      <i class='material-icons circle red'>account_balance</i>
-      <span class='title black-text text-darken-2'>Address</span>
-      <p>$address 
-      </p>
-    </li>
-    <li class='collection-item avatar #c8e6c9 green lighten-4'>
-      <i class='material-icons circle red'>assignmen</i>
-      <span class='title black-text text-darken-2'>Score</span>
-      <p>$score
-         
-      </p>
-    </li>
-  </ul>";
+
+<form  action='to_next_yrs.php' method='post'>
+<p class='has-text-weight-bold' style='display:inline' >Academic Year - </p> <code style='display:inline'>$ac_yrs</code>
+<br><br>
+
+  <div style='display:inline;'> 
+ <img src='../images/mtu.png' alt='Girl in a jacket' width='150' height='160' style='float:left'> 
+ <br><br><br>
+ <h1 class='is-size-2'><input type='hidden' name='name' value='$name'>$name</h1>
+
+ </div>
+
+
+
+
+
+
+
+
+
+<br><br><br><br>
+<p class='has-text-weight-bold' style='display:inline' >Student's ID - </p> <code style='display:inline'><input type='hidden' name='id' value='$id'>$id</code>
+<br><br>
+<p class='has-text-weight-bold' style='display:inline' >Major - </p> <code style='display:inline'>$s_major</code>
+<br><br>
+<p class='has-text-weight-bold' style='display:inline' >Roll Number - </p> <code style='display:inline'>$s_yrs BE $major - $roll_no</code>
+<br><br>
+<p class='has-text-weight-bold' style='display:inline' >Year - </p> <code style='display:inline'>$yrs</code>
+<br><br>
+<p class='has-text-weight-bold' style='display:inline' >Gender - </p> <code style='display:inline'>$gender</code>
+<br><br>
+<p class='has-text-weight-bold' style='display:inline' >Father's Name - </p> <code style='display:inline'>$d_name</code>
+<br><br>
+<p class='has-text-weight-bold' style='display:inline' >Mother's Name - </p> <code style='display:inline'>$m_name</code>
+<br><br>
+<p class='has-text-weight-bold' style='display:inline' >Address - </p> <code style='display:inline'>$address</code>
+<br><br>
+<p class='has-text-weight-bold' style='display:inline' >Phone Number - </p> <code style='display:inline'>$phone</code>
+<br><br>
+<p class='has-text-weight-bold' style='display:inline' >NRC Number - </p> <code style='display:inline'>$nrc_no</code>
+<br><br>
+<hr size='10'>
+   ";
+
+   
 }
 ?>
 
-
-  <a class="waves-effect waves-light btn">Edit</a>
-            
-
+<br><br><br>
+  <button class="button is-success is-outlined is-medium" type="submit">To Next Academic Year</button>
+            <br><br>
+</form>
 
   </div>
   <div class="column"></div>
